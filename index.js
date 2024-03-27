@@ -40,24 +40,25 @@ app.post("/", async (req, res) => {
     })
     .then(() => {
       console.log("Connected to MongoDB");
+
+      // add the data to the database
+      // send a response to the user
+      const newW24students = new W24students({
+        name: "Kandebaduge Don Ashan Dulaj Wickramaratne",
+        studentID: "300364542",
+      });
+      
+      newW24students
+        .save()
+        .then(() => {
+          res.send(`<h1>Document Added</h1>`);
+        })
+        .catch((error) => {
+          res.send(`<h1>Error Occurred: ${error}</h1>`);
+        });
     })
     .catch((error) => {
       console.log("Error connecting to MongoDB");
-    });
-
-  // add the data to the database
-  // send a response to the user
-  const newW24students = new W24students({
-    name: "Kandebaduge Don Ashan Dulaj Wickramaratne",
-    studentID: "300364542",
-  });
-  newW24students
-    .save()
-    .then(() => {
-      res.send(`<h1>Document Added</h1>`);
-    })
-    .catch((error) => {
-      res.send(`<h1>Error Occurred: ${error}</h1>`);
     });
 });
 
